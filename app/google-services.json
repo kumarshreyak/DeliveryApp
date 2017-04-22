@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "731072579009",
+    "firebase_url": "https://deliveryapp-fba05.firebaseio.com",
+    "project_id": "deliveryapp-fba05",
+    "storage_bucket": "deliveryapp-fba05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731072579009:android:ca5a145cc7ae5c84",
+        "android_client_info": {
+          "package_name": "com.hereforfood.deliveryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731072579009-se3i6ej43u6nej4etr4rldalmk7gs9ge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hereforfood.deliveryapp",
+            "certificate_hash": "72a83a3f1536d995b49e6c86d3b4a4d496a14f2a"
+          }
+        },
+        {
+          "client_id": "731072579009-3cic19mo862d2pvj4drfjts5u9s8r4qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9Y5cohTP6dOnJl6zVDNvg9poTqB0778"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731072579009-3cic19mo862d2pvj4drfjts5u9s8r4qc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
