@@ -63,10 +63,12 @@ public class MainActivity extends AppCompatActivity {
         // Write a message to the database
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference myRef = database.getReference("Users");
-//
-//        // Adding user to the database
-//        User user = new User(auth.getCurrentUser().toString());
 
+        // Adding user to the database
+//        User user = new User(auth.getCurrentUser().toString());
+//        String userID = auth.getCurrentUser().getUid();
+//        myRef.child(userID).setValue(user);
+        //myRef.child(userID).setValue("Helloworld");
 
     }
 

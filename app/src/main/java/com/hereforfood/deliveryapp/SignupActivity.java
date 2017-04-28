@@ -32,14 +32,18 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        //Get Firebase auth instance
+        // Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+
+        // Setting up the database helper
+        db = new DatabaseHelper();
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
@@ -88,7 +92,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 else{
                     progressBar.setVisibility(View.VISIBLE);
-                    //create user
+                    // Create user
                     auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -102,6 +106,10 @@ public class SignupActivity extends AppCompatActivity {
                                         Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
+                                        //Add user to the database
+                                        db.addUser(auth.getCurrentUser().getUid(), auth.getCurrentUser().getEmail());
+
+                                        // Show home screen
                                         startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                         finish();
                                     }

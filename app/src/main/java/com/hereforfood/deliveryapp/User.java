@@ -6,11 +6,17 @@ package com.hereforfood.deliveryapp;
 
 public class User {
 
-    private String userId;
+    public String userId;
+    public String userEmail;
 
     public User() {;}
 
     public User(String userId) {
         this.userId = userId;
+    }
+
+    public User(String userId, String userEmail) {
+        this.userId = userId;
+        this.userEmail = userEmail;
     }
 }

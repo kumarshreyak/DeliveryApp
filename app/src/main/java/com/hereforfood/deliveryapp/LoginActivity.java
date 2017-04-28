@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    myRef.setValue("Hello World !!");
+                                    //myRef.setValue("Hello World !!");
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
