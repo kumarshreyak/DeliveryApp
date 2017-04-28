@@ -14,6 +14,7 @@ public class DatabaseHelper {
     private static final String HOUSE_TABLE = "House";
     private static final String LOCALITY_TABLE = "Locality";
     private static final String ASSIGNMENT_TABLE = "Assignment";
+    private static final String DELIVERY_TABLE = "Delivery";
 
     FirebaseAuth auth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -6,6 +6,7 @@ package com.hereforfood.deliveryapp;
 
 public class Locality {
 
+    private int id;
     private String city;
     private double latitude;
     private double longitude;
