@@ -35,4 +35,8 @@ public class DatabaseHelper {
         userDB.child(userId).setValue(user);
     }
 
+    // TODO functions for getting data from website (houses etc.)
+
+
+
 }
