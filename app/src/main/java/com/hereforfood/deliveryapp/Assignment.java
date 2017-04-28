@@ -9,8 +9,9 @@ import java.sql.Time;
 public class Assignment {
 
     Locality locality;
-    private int userId;
+    private String userId;
     private Time assignedTime;
+    int localityId;
 
     public Assignment() { ; }
 }
