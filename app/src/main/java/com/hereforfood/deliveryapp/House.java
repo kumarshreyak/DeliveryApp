@@ -6,8 +6,9 @@ package com.hereforfood.deliveryapp;
 
 public class House {
 
-    private int id ;
-    private int reportCode;
+    public int id;
+    private int reportCode, isComplete = 0 ;
+    public String Address;
     private double latitude;
     private double longitude;
 
