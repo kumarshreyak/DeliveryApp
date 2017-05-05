@@ -1,6 +1,7 @@
 package com.hereforfood.deliveryapp;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,14 +10,17 @@ import java.util.List;
 
 public class Locality {
 
-    private int id;
-    private String AddressLine1, city, landmark;
-    private double latitude;
-    private double longitude;
-    private int isCompleted = 0, housesLeft;
-    private Date date;
-    private List<House> house ;
+    public int id;
+    String AddressLine1, city, landmark;
+    double latitude;
+    double longitude;
+    int isCompleted = 0, housesLeft;
+    Date date;
+    List<House> house ;
 
-    public Locality() { ; }
+
+    public Locality() {
+        house = new ArrayList<House>();
+    }
 
 }
