@@ -14,13 +14,14 @@ public class Locality {
     String AddressLine1, city, landmark;
     double latitude;
     double longitude;
-    int isCompleted = 0, housesLeft;
+    int isCompleted, housesLeft;
     Date date;
     List<House> house ;
 
 
     public Locality() {
         house = new ArrayList<House>();
+        isCompleted = 0;
     }
 
 }

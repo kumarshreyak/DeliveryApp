@@ -24,7 +24,7 @@ public class User {
         this.userEmail = userEmail;
         locality = new ArrayList<Locality>();
 
-        // TODO insert dummy values in locality list and insert it into firebase
+        //insert dummy values in locality list and insert it into firebase
         Locality l = new Locality();
 
         // Adding locality with id = 21
@@ -59,7 +59,7 @@ public class User {
         l.house.add(h);
         h.id = 50;
         l.house.add(h);
-        locality.add(l);
+       // locality.add(l);
 
     }
 }
