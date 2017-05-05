@@ -6,19 +6,11 @@ package com.hereforfood.deliveryapp;
 
 public class House {
 
-    private int id = 69;
-    private int reportCode;
-    private int latitude;
-    private int longitude;
-    private String userId;
+    int id;
+    int reportCode, isComplete = 0 ;
+    String Address;
+    double latitude;
+    double longitude;
 
     public House() { ; }
-
-    public House(int houseId) {
-        id = houseId;
-    }
-
-    public House(String id) {
-        userId = id;
-    }
 }
