@@ -3,6 +3,7 @@ package com.hereforfood.deliveryapp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,12 +40,34 @@ public class DatabaseHelper {
     }
 
     public void getCity(String userId) {
-        User user;
+        User user1;
         userDB = database.getReference(USER_TABLE);
         userDB.orderByChild("userId").addChildEventListener(new ChildEventListener() {
+            User user;
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                User user = dataSnapshot.getValue(User.class);
+                user = dataSnapshot.getValue(User.class);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
 
 
