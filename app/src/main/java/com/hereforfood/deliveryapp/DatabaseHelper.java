@@ -1,6 +1,8 @@
 package com.hereforfood.deliveryapp;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,6 +36,19 @@ public class DatabaseHelper {
         userDB = database.getReference(USER_TABLE);
         User user = new User(userId, email);
         userDB.child(userId).setValue(user);
+    }
+
+    public void getCity(String userId) {
+        User user;
+        userDB = database.getReference(USER_TABLE);
+        userDB.orderByChild("userId").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                User user = dataSnapshot.getValue(User.class);
+            }
+
+
+        });
     }
 
     // TODO functions for getting data from website (houses etc.)

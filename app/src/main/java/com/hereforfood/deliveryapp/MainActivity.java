@@ -59,16 +59,9 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
 
-        // User is already signed in
-        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("Users");
+        getActionBar().setTitle(user.getUid());
 
-        // Adding user to the database
-//        User user = new User(auth.getCurrentUser().toString());
-//        String userID = auth.getCurrentUser().getUid();
-//        myRef.child(userID).setValue(user);
-        //myRef.child(userID).setValue("Helloworld");
+        // This means user is logged in and home screen is displayed
 
     }
 
