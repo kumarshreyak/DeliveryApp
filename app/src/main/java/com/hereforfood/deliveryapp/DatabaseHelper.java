@@ -40,7 +40,7 @@ public class DatabaseHelper {
     }
 
     public void getCity(String userId) {
-        User user1;
+        String userCity;
         userDB = database.getReference(USER_TABLE);
         userDB.orderByChild("userId").addChildEventListener(new ChildEventListener() {
             User user;
@@ -69,8 +69,6 @@ public class DatabaseHelper {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
-
         });
     }
 
