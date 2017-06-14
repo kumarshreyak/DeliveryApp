@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
 
+        getActionBar().setTitle(user.getUid());
 
         // This means user is logged in and home screen is displayed
 

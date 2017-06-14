@@ -12,7 +12,6 @@ public class User {
     public String userId;
     public String userEmail;
     public List<Locality> locality;
-    public String username;
 
     public User() {;}
 
@@ -23,7 +22,6 @@ public class User {
     public User(String userId, String userEmail) {
         this.userId = userId;
         this.userEmail = userEmail;
-        this.username = "John Doe";
         locality = new ArrayList<Locality>();
 
         //insert dummy values in locality list and insert it into firebase
