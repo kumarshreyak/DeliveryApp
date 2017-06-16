@@ -24,4 +24,8 @@ public class Locality {
         isCompleted = 0;
     }
 
+    public List<House> getLocalityHouses() {
+        return house;
+    }
+
 }

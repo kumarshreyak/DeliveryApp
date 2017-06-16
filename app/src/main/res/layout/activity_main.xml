@@ -9,10 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hereforfood.deliveryapp.MainActivity">
+
     <TextView
+        android:id="@+id/localityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Locality"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/houseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Houses"
+        android:layout_marginEnd="92dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="30dp"

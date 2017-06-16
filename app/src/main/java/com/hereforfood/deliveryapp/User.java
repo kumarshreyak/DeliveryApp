@@ -64,4 +64,20 @@ public class User {
        // locality.add(l);
 
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getUserCity() {
+        return userCity;
+    }
+
+    public List<Locality> getUserLocality() {
+        return locality;
+    }
 }

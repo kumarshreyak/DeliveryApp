@@ -5,19 +5,24 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +65,35 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
 
-        getActionBar().setTitle(user.getUid());
-
         // This means user is logged in and home screen is displayed
+        final TextView localityText = (TextView) findViewById(R.id.localityText);
+        final TextView houseText = (TextView) findViewById(R.id.houseText);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("User").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //TODO make this shiz faster
+
+                // Getting user data
+                User user = dataSnapshot.getValue(User.class);
+
+                // Setting the title bar
+                setTitle(user.getUserCity());
+
+                // Setting the text views
+                localityText.setText("Number of localities = " + user.getUserLocality().size());
+                houseText.setText("Number of houses = " + user.getUserLocality().size());
+
+                Log.d("D", "User name: " + user.getUserCity() + ", email " + user.getUserEmail());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("D", "Failed to read value.", error.toException());
+            }
+        });
 
     }
 
