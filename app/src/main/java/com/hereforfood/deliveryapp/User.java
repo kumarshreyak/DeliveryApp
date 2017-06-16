@@ -12,6 +12,7 @@ public class User {
     public String userId;
     public String userEmail;
     public List<Locality> locality;
+    public String userCity;
 
     public User() {;}
 
@@ -22,6 +23,7 @@ public class User {
     public User(String userId, String userEmail) {
         this.userId = userId;
         this.userEmail = userEmail;
+        this.userCity = "Jaipur";
         locality = new ArrayList<Locality>();
 
         //insert dummy values in locality list and insert it into firebase
@@ -30,7 +32,7 @@ public class User {
         // Adding locality with id = 21
         l.id = 21;
         l.AddressLine1 = "lorem ipsum";
-        l.city = " MUMBAI";
+        l.city = "MUMBAI";
         List<House> houses = new ArrayList<House>();
         House h = new House();
         h.id = 1;
