@@ -1,16 +1,21 @@
 package com.hereforfood.deliveryapp;
 
+import java.io.Serializable;
+
 /**
  * Created by Shreyak Kumar on 23-04-2017.
  */
 
-public class House {
+public class House implements Serializable {
 
     int id;
-    int reportCode, isComplete = 0 ;
+    int reportCode;
     String Address;
     double latitude;
     double longitude;
+    boolean isComplete;
 
-    public House() { ; }
+    public House() {
+        isComplete = false;
+    }
 }

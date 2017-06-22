@@ -106,6 +106,7 @@ public class SignupActivity extends AppCompatActivity {
                                         Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
+
                                         //Add user to the database
                                         db.addUser(auth.getCurrentUser().getUid(), auth.getCurrentUser().getEmail());
 

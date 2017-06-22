@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private DatabaseReference mDatabase;
+    User currUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +77,16 @@ public class MainActivity extends AppCompatActivity {
                 //TODO make this shiz faster
 
                 // Getting user data
-                User user = dataSnapshot.getValue(User.class);
+                currUser = dataSnapshot.getValue(User.class);
 
                 // Setting the title bar
-                setTitle(user.getUserCity());
+                setTitle(currUser.getUserCity());
 
                 // Setting the text views
-                localityText.setText("Number of localities = " + user.getUserLocality().size());
-                houseText.setText("Number of houses = " + user.getUserLocality().size());
+                localityText.setText("Localities  " + currUser.getLocalitiesDone() + " / " + currUser.getTotalLocalities());
+                houseText.setText("Houses " + currUser.getLocalitiesDone() + " / " + currUser.getTotalLocalities());
 
-                Log.d("D", "User name: " + user.getUserCity() + ", email " + user.getUserEmail());
+                Log.d("D", "User name: " + currUser.getUserCity() + ", email " + currUser.getUserEmail());
             }
 
             @Override
@@ -142,10 +143,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void signOut() {
-        auth.signOut();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -164,5 +161,16 @@ public class MainActivity extends AppCompatActivity {
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
+    }
+
+    public void signOut() {
+        auth.signOut();
+    }
+
+    public void localityTextOnClick(View view)
+    {
+        Intent intent = new Intent(this, LocalitySelect.class);
+        intent.putExtra("user",currUser);
+        startActivity(intent);
     }
 }
