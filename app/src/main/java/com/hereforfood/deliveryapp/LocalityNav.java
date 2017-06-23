@@ -10,10 +10,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class LocalityNav extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Locality locality;
+    List<House> house;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,10 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Get the locality's data
+        locality = (Locality) getIntent().getSerializableExtra("locality");
+        house = locality.getLocalityHouses();
     }
 
 
@@ -38,10 +45,16 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        LatLng marker;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker at all houses in this locality
+        for (int i = 0; i < house.size(); i ++) {
+            marker = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(marker).title("House" + house.get(i).getId()));
+        }
+
+        // Move the camera to the first unvisited house
+        marker = new LatLng(house.get(0).getLatitude(), house.get(0).getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16));
     }
 }

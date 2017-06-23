@@ -18,4 +18,16 @@ public class House implements Serializable {
     public House() {
         isComplete = false;
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
