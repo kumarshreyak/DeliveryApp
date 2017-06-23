@@ -7,7 +7,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -45,16 +47,36 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng marker;
+        LatLng latLng;
 
         // Add a marker at all houses in this locality
         for (int i = 0; i < house.size(); i ++) {
-            marker = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(marker).title("House" + house.get(i).getId()));
+            latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
+            if(house.get(i).isComplete()) {
+                // Adds green marker if house is complete
+                mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        .title("House " + house.get(i).getId()));
+            } else {
+                // Adds red marker if house is incomplete
+                mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        .title("House " + house.get(i).getId()));
+            }
         }
 
         // Move the camera to the first unvisited house
-        marker = new LatLng(house.get(0).getLatitude(), house.get(0).getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16));
+        for (int i = 0; i < house.size(); i ++) {
+            if(!house.get(i).isComplete()) {
+                latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                break;
+            }
+        }
+
+
+
     }
 }

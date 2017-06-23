@@ -11,9 +11,9 @@ public class House implements Serializable {
     int id;
     int reportCode;
     String Address;
-    double latitude;
-    double longitude;
-    boolean isComplete;
+    private double latitude;
+    private double longitude;
+    private boolean isComplete;
 
     public House() {
         isComplete = false;
@@ -29,5 +29,9 @@ public class House implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
     }
 }
