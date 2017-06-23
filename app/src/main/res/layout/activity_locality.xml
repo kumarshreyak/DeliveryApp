@@ -19,4 +19,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="11dp"
         android:text="Address comes here.." />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addressText"
+        android:layout_marginTop="120dp"
+        android:onClick="navButtonClick"
+        android:text="Navigate" />
 </RelativeLayout>

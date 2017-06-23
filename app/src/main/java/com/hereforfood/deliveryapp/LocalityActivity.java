@@ -1,5 +1,6 @@
 package com.hereforfood.deliveryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,12 @@ public class LocalityActivity extends AppCompatActivity {
         TextView addressText = (TextView) findViewById(R.id.addressText);
         addressText.setText(locality.getAddress());
 
+    }
+
+    public void navButtonClick(View view) {
+        Intent intent = new Intent(this, LocalityNav.class);
+        intent.putExtra("locality",locality);
+        startActivity(intent);
     }
 
 }
