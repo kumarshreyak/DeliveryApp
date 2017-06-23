@@ -22,11 +22,15 @@
             android:name=".LocalitySelect"
             android:label="@string/title_activity_locality_select"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hereforfood.deliveryapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".LocalityActivity"
+            android:label="@string/title_activity_locality"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
