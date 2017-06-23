@@ -38,4 +38,8 @@ public class Locality implements Serializable {
         return housesLeft;
     }
 
+    public String getAddress() {
+        return AddressLine1;
+    }
+
 }
