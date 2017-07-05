@@ -1,8 +1,15 @@
 package com.hereforfood.deliveryapp;
 
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.Manifest;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,7 +23,7 @@ import java.util.List;
 
 public class LocalityNav extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap mgoogleMap;
     Locality locality;
     List<House> house;
 
@@ -46,21 +53,21 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        this.mgoogleMap = googleMap;
         LatLng latLng;
 
         // Add a marker at all houses in this locality
-        for (int i = 0; i < house.size(); i ++) {
+        for (int i = 0; i < house.size(); i++) {
             latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
-            if(house.get(i).isComplete()) {
+            if (house.get(i).isComplete()) {
                 // Adds green marker if house is complete
-                mMap.addMarker(new MarkerOptions()
+                this.mgoogleMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                         .title("House " + house.get(i).getId()));
             } else {
                 // Adds red marker if house is incomplete
-                mMap.addMarker(new MarkerOptions()
+                this.mgoogleMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                         .title("House " + house.get(i).getId()));
@@ -68,15 +75,43 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         }
 
         // Move the camera to the first unvisited house
-        for (int i = 0; i < house.size(); i ++) {
-            if(!house.get(i).isComplete()) {
+        for (int i = 0; i < house.size(); i++) {
+            if (!house.get(i).isComplete()) {
                 latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                this.mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                 break;
             }
         }
 
+        // Shows the user's current location with blue dot.
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        69);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+
+        }
+        mgoogleMap.setMyLocationEnabled(true);
+
+        // TODO Show path
     }
 }

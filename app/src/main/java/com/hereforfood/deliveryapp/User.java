@@ -14,13 +14,12 @@ public class User implements Serializable {
     public String userEmail;
     public List<Locality> locality;
     public String userCity;
-    public long localitiesDone;
+    public long localitiesDone = 0;
 
     public User() {;}
 
     public User(String userId) {
         this.userId = userId;
-        localitiesDone = 0;
     }
 
     public User(String userId, String userEmail) {

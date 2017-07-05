@@ -34,4 +34,8 @@ public class House implements Serializable {
     public boolean isComplete() {
         return isComplete;
     }
+
+    public void setComplete(boolean value) {
+        isComplete = value;
+    }
 }
