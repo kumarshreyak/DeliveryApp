@@ -52,5 +52,6 @@
     <string name="title_activity_locality_select">LocalitySelect</string>
     <string name="title_activity_locality">LocalityActivity</string>
     <string name="title_activity_locality_nav">Map</string>
+    <string name="title_activity_house">HouseActivity</string>
 
 </resources>

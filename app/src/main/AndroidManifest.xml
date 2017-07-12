@@ -53,7 +53,11 @@
 
         <activity
             android:name=".LocalityNav"
-            android:label="@string/title_activity_locality_nav"></activity>
+            android:label="@string/title_activity_locality_nav" />
+        <activity
+            android:name=".HouseActivity"
+            android:label="@string/title_activity_house"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

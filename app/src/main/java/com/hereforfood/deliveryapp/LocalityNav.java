@@ -1,8 +1,10 @@
 package com.hereforfood.deliveryapp;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
@@ -112,6 +115,44 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         }
         mgoogleMap.setMyLocationEnabled(true);
 
-        // TODO Show path
+        mgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                int housePos = -1;
+                LatLng pos = marker.getPosition();
+                for (int i = 0; i < house.size(); i++)
+                {
+                    if(house.get(i).getLatitude() == pos.latitude)
+                    {
+                        housePos = i;
+                        break;
+                    }
+                }
+//                Intent intent = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("http://maps.google.com/maps?f=d&daddr="+pos.latitude+","+pos.longitude));
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.addCategory(Intent.CATEGORY_LAUNCHER );
+//                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=Berlin Germany"));
+                //startActivity(intent);
+                if(housePos != -1)
+                {
+                    Intent intent = new Intent(LocalityNav.this, HouseActivity.class);
+                    intent.putExtra("house", house.get(housePos));
+                    startActivity(intent);
+                }
+
+
+            }
+
+        });
+
+        // TODO Show path (start navigation)
+        Double latitude =  house.get(0).getLatitude();
+        Double longitude =  house.get(0).getLongitude();
+
+
+
     }
+
 }
