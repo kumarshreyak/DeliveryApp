@@ -38,9 +38,7 @@ public class HouseActivity extends AppCompatActivity {
     // Deliver button's onclick method
     public void delButtonClick(View v)
     {
-        Intent intent = new Intent(this, DeliveryActivity.class);
-        intent.putExtra("house", house);
-        startActivity(intent);
+        // TODO Open a pop window
     }
 
 }
