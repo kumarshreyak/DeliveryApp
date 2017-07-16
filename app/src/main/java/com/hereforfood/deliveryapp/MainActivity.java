@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify callingActivity parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(MainActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Your profile is deleted:( Create callingActivity account now!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(MainActivity.this, SignupActivity.class));
                                     finish();
                                     progressBar.setVisibility(View.GONE);

@@ -21,7 +21,7 @@ public class HouseActivity extends AppCompatActivity {
         house = (House) getIntent().getSerializableExtra("house");
         setTitle("House " + house.getId());
 
-        // TODO Add elements to this activity and make a "Deliver" button (and its activity)
+        // TODO Add elements to this activity and make callingActivity "Deliver" button (and its activity)
         TextView houseAddrText = (TextView) findViewById(R.id.AddrText);
         TextView delStatText = (TextView) findViewById(R.id.DeliText);
 
@@ -30,15 +30,17 @@ public class HouseActivity extends AppCompatActivity {
 
         // Displaying status of the delivery
         if(house.isComplete())
-            delStatText.setText("Delivery :- Completed");
+            delStatText.setText("Delivery Status :- Complete");
         else
-            delStatText.setText("Delivery :- Incomplete");
+            delStatText.setText("Delivery Status :- Incomplete");
     }
 
     // Deliver button's onclick method
     public void delButtonClick(View v)
     {
-        // TODO Open a pop window
+        // TODO Open callingActivity pop window and check if the update to the DB updates this page too
+        DeliveryConfirmDialog dialog = new DeliveryConfirmDialog(HouseActivity.this);
+        dialog.show();
     }
 
 }
