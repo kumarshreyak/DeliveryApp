@@ -16,7 +16,9 @@ public class User implements Serializable {
     public String userCity;
     public long localitiesDone = 0;
 
-    public User() {;}
+    public User() {
+
+    }
 
     public User(String userId) {
         this.userId = userId;
@@ -55,6 +57,9 @@ public class User implements Serializable {
     }
 
     public long getTotalLocalities() {
-        return locality.size();
+        if(locality.isEmpty())
+            return 0;
+        else
+            return locality.size();
     }
 }

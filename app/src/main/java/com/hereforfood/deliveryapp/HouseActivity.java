@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class HouseActivity extends AppCompatActivity {
 
@@ -18,6 +19,14 @@ public class HouseActivity extends AppCompatActivity {
         house = (House) getIntent().getSerializableExtra("house");
         setTitle("House " + house.getId());
 
+        // TODO Add elements to this activity and make a "Deliver" button (and its activity)
+        TextView houseAddrText = (TextView) findViewById(R.id.AddrText);
+        TextView delStatText = (TextView) findViewById(R.id.DeliText);
+        houseAddrText.setText(house.getAddress());
+        if(house.isComplete())
+            delStatText.setText("Delivery :- Completed");
+        else
+            delStatText.setText("Delivery :- Incomplete");
 
     }
 

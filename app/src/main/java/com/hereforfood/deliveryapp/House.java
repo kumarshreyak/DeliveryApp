@@ -10,13 +10,14 @@ public class House implements Serializable {
 
     int id;
     int reportCode;
-    String Address;
+    String address;
     private double latitude;
     private double longitude;
     private boolean isComplete;
 
     public House() {
         isComplete = false;
+        address = "lorem ipsum dada";
     }
 
     public double getLatitude() {
@@ -37,5 +38,9 @@ public class House implements Serializable {
 
     public void setComplete(boolean value) {
         isComplete = value;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
