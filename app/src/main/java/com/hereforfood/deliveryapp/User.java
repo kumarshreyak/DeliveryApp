@@ -17,7 +17,7 @@ public class User implements Serializable {
     public long localitiesDone = 0;
 
     public User() {
-
+        // Enter dummy data
     }
 
     public User(String userId) {
