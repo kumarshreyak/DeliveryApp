@@ -57,6 +57,10 @@
         <activity
             android:name=".HouseActivity"
             android:label="@string/title_activity_house"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DeliveryActivity"
+            android:label="@string/title_activity_delivery"
             android:theme="@style/AppTheme"></activity>
     </application>
 
