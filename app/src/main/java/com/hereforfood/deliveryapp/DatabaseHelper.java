@@ -1,6 +1,9 @@
 package com.hereforfood.deliveryapp;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,6 +37,50 @@ public class DatabaseHelper {
         userDB = database.getReference(USER_TABLE);
         User user = new User(userId, email);
         userDB.child(userId).setValue(user);
+        // TODO Trying to assign id'd to each locality and still fit them into a java list (as the User class is made)
+    }
+
+    public void getCity(String userId) {
+        User user1;
+        userDB = database.getReference(USER_TABLE);
+        userDB.orderByChild("userId").addChildEventListener(new ChildEventListener() {
+            User user;
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+    }
+
+    public void setHouseDeliveryStatus(House house, boolean value, String userId, String localityId)
+    {
+//        house.setComplete(value);
+//        userDB = database.getReference(USER_TABLE)
+//                .child(userId)
+//                .child("locality")
+//                .child(localityId);
     }
 
     // TODO functions for getting data from website (houses etc.)
