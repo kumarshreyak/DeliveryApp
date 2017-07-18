@@ -139,6 +139,7 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
                 {
                     Intent intent = new Intent(LocalityNav.this, HouseActivity.class);
                     intent.putExtra("house", house.get(housePos));
+                    intent.putExtra("localityId", locality.getId());
                     startActivity(intent);
                 }
 

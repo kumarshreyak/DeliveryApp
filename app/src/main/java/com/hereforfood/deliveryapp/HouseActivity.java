@@ -17,17 +17,20 @@ import android.widget.TextView;
 public class HouseActivity extends AppCompatActivity {
 
     House house;
+    String localityId;
+    TextView houseAddrText, delStatText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
         house = (House) getIntent().getSerializableExtra("house");
+        localityId = String.valueOf((int) getIntent().getSerializableExtra("localityId"));
         setTitle("House " + house.getId());
 
         // TODO Add elements to this activity and make callingActivity "Deliver" button (and its activity)
-        TextView houseAddrText = (TextView) findViewById(R.id.AddrText);
-        TextView delStatText = (TextView) findViewById(R.id.DeliText);
+        houseAddrText = (TextView) findViewById(R.id.AddrText);
+        delStatText = (TextView) findViewById(R.id.DeliText);
 
         // Setting the house's address
         houseAddrText.setText(house.getAddress());

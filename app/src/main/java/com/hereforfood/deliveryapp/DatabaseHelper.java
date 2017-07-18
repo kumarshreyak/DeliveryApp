@@ -37,6 +37,7 @@ public class DatabaseHelper {
         userDB = database.getReference(USER_TABLE);
         User user = new User(userId, email);
         userDB.child(userId).setValue(user);
+        // TODO Trying to assign id'd to each locality and still fit them into a java list (as the User class is made)
     }
 
     public void getCity(String userId) {
@@ -47,7 +48,6 @@ public class DatabaseHelper {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 user = dataSnapshot.getValue(User.class);
-
             }
 
             @Override
@@ -72,6 +72,15 @@ public class DatabaseHelper {
 
 
         });
+    }
+
+    public void setHouseDeliveryStatus(House house, boolean value, String userId, String localityId)
+    {
+//        house.setComplete(value);
+//        userDB = database.getReference(USER_TABLE)
+//                .child(userId)
+//                .child("locality")
+//                .child(localityId);
     }
 
     // TODO functions for getting data from website (houses etc.)
