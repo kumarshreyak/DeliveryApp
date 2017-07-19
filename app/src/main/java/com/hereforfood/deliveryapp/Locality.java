@@ -3,6 +3,7 @@ package com.hereforfood.deliveryapp;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,26 +12,28 @@ import java.util.List;
 
 public class Locality implements Serializable {
 
-    public int id;
+    public String id;
     String AddressLine1, city, landmark;
     double latitude;
     double longitude;
     int housesLeft;
     Date date;
-    List<House> house ;
+    HashMap<String, House> house ;
     boolean isComplete;
 
+    public Locality() {}
 
-    public Locality() {
-        house = new ArrayList<House>();
+    public Locality(String localityId) {
+        house = new HashMap<>();
+        this.id = localityId;
         isComplete = false;
     }
 
-    public List<House> getLocalityHouses() {
+    public HashMap<String, House> getLocalityHouses() {
         return house;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -40,6 +43,11 @@ public class Locality implements Serializable {
 
     public String getAddress() {
         return AddressLine1;
+    }
+
+    public void addHouse(House new_house)
+    {
+        house.put(new_house.getId(), new_house);
     }
 
 }

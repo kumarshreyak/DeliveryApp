@@ -8,14 +8,17 @@ import java.io.Serializable;
 
 public class House implements Serializable {
 
-    int id;
+    String id;
     int reportCode;
     String address;
     private double latitude;
     private double longitude;
     private boolean isComplete;
 
-    public House() {
+    public House() {}
+
+    public House(String hId) {
+        this.id = hId;
         isComplete = false;
         address = "lorem ipsum dada";
     }
@@ -28,7 +31,7 @@ public class House implements Serializable {
         return longitude;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

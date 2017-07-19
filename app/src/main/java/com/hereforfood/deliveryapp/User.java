@@ -2,6 +2,7 @@ package com.hereforfood.deliveryapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,28 +13,17 @@ public class User implements Serializable {
 
     public String userId;
     public String userEmail;
-    public List<Locality> locality;
+    public HashMap<String, Locality> locality;
     public String userCity;
     public long localitiesDone = 0;
 
-    public User() {
-        // Enter dummy data
-    }
-
-    public User(String userId) {
-        this.userId = userId;
-    }
+    public User() {}
 
     public User(String userId, String userEmail) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.userCity = "Jaipur";
-    }
-
-    public User(String userId, String userEmail, String userCity) {
-        this.userId = userId;
-        this.userEmail = userEmail;
-        this.userCity = userCity;
+        locality = new HashMap<>();
     }
 
     public String getUserId() {
@@ -48,7 +38,7 @@ public class User implements Serializable {
         return userCity;
     }
 
-    public List<Locality> getUserLocality() {
+    public HashMap<String, Locality> getUserLocality() {
         return locality;
     }
 
@@ -61,5 +51,10 @@ public class User implements Serializable {
             return 0;
         else
             return locality.size();
+    }
+
+    public void addLocality(Locality new_locality)
+    {
+        locality.put(new_locality.getId(), new_locality);
     }
 }

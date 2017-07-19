@@ -36,10 +36,24 @@ public class DatabaseHelper {
     public void addUser(String userId, String email) {
         userDB = database.getReference(USER_TABLE);
         User user = new User(userId, email);
+        addLocalityToUser(user);
         userDB.child(userId).setValue(user);
         // TODO Try to assign id's to each locality and still fit them into a java list (as the User class is made)
         // use this to add dummy locality data to the user
         // https://stackoverflow.com/questions/41990008/preset-object-id-when-pushing-to-firebase
+    }
+
+    public void addLocalityToUser(User user) {
+        String id = database.getReference().push().getKey();
+        Locality locality = new Locality(id);
+        addHouseToLocality(locality);
+        user.addLocality(locality);
+    }
+
+    public void addHouseToLocality(Locality locality) {
+        String id = database.getReference().push().getKey();
+        House house = new House(id);
+        locality.addHouse(house);
     }
 
     public void getCity(String userId) {
