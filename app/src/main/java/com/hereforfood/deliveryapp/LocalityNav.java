@@ -61,20 +61,20 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         LatLng latLng;
 
         // Add callingActivity marker at all houses in this locality
-        for (int i = 0; i < house.size(); i++) {
-            latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
-            if (house.get(i).isComplete()) {
+        for(House value : house.values()) {
+            latLng = new LatLng(value.getLatitude(), value.getLongitude());
+            if (value.isComplete()) {
                 // Adds green marker if house is complete
                 this.mgoogleMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                        .title("House " + house.get(i).getId()));
+                        .title("House " + value.getId()));
             } else {
                 // Adds red marker if house is incomplete
                 this.mgoogleMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                        .title("House " + house.get(i).getId()));
+                        .title("House " + value.getId()));
             }
         }
 
@@ -143,12 +143,6 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
             }
 
         });
-
-        // TODO Show path (start navigation)
-        Double latitude =  house.get(0).getLatitude();
-        Double longitude =  house.get(0).getLongitude();
-
-
 
     }
 

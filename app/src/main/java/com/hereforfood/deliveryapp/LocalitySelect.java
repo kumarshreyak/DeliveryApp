@@ -11,9 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.HashMap;
+
 public class LocalitySelect extends AppCompatActivity {
 
     User user;
+    HashMap<String, Locality> localityHashMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,7 @@ public class LocalitySelect extends AppCompatActivity {
 
         // Get the user data
         user = (User) getIntent().getSerializableExtra("user");
+        localityHashMap = user.getUserLocality();
 
         //Populate the ListView with user's localities
         ListView listView = (ListView) findViewById(R.id.localityList);
@@ -30,10 +34,11 @@ public class LocalitySelect extends AppCompatActivity {
         //TODO make the onListItemClick method
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView adapterView, View view, int position, long id) {
+                String mKey[] = localityHashMap.keySet().toArray(new String[localityHashMap.size()]);
 
                 // Open the clicked locality's activity
                 Intent intent = new Intent(LocalitySelect.this, LocalityActivity.class);
-                intent.putExtra("locality", user.getUserLocality().get(position));
+                intent.putExtra("locality", localityHashMap.get(mKey[position]));
                 startActivity(intent);
             }
         });
