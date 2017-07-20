@@ -72,6 +72,8 @@ public class HouseActivity extends AppCompatActivity {
         // Create the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        // TODO VAlue is updated in database but no pages are in sync, instead of passing data in Intent fetch data from firebase
     }
 
 }
