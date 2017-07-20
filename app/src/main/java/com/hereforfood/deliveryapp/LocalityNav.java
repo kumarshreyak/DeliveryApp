@@ -22,13 +22,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LocalityNav extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mgoogleMap;
     Locality locality;
-    List<House> house;
+    HashMap<String, House> house;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +79,10 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         }
 
         // Move the camera to the first unvisited house
-        for (int i = 0; i < house.size(); i++) {
-            if (!house.get(i).isComplete()) {
-                latLng = new LatLng(house.get(i).getLatitude(), house.get(i).getLongitude());
+
+        for(House value : house.values()) {
+            if(!value.isComplete()) {
+                latLng = new LatLng(value.getLatitude(), value.getLongitude());
                 this.mgoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                 break;
             }
@@ -118,27 +120,21 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
         mgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                int housePos = -1;
+                House houseVal = new House("nope") ;
                 LatLng pos = marker.getPosition();
-                for (int i = 0; i < house.size(); i++)
-                {
-                    if(house.get(i).getLatitude() == pos.latitude)
+
+                for(House value : house.values()) {
+                    if(value.getLatitude() == pos.latitude)
                     {
-                        housePos = i;
+                        houseVal = value;
                         break;
                     }
                 }
-//                Intent intent = new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://maps.google.com/maps?f=d&daddr="+pos.latitude+","+pos.longitude));
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.addCategory(Intent.CATEGORY_LAUNCHER );
-//                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=Berlin Germany"));
-                //startActivity(intent);
-                if(housePos != -1)
+
+                if(houseVal.getId() != "nope")
                 {
                     Intent intent = new Intent(LocalityNav.this, HouseActivity.class);
-                    intent.putExtra("house", house.get(housePos));
+                    intent.putExtra("house", houseVal);
                     intent.putExtra("localityId", locality.getId());
                     startActivity(intent);
                 }

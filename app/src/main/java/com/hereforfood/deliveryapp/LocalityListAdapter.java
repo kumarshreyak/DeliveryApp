@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,15 +18,17 @@ import java.util.List;
 public class LocalityListAdapter extends BaseAdapter {
 
     Context context;
-    List<Locality> localityList;
+    HashMap<String, Locality> localityList;
+    private String mKeys[];
     private static LayoutInflater inflater = null;
 
-    public LocalityListAdapter(Context context, List<Locality> localityList) {
+    public LocalityListAdapter(Context context, HashMap<String, Locality> localityList) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.localityList = localityList;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mKeys = localityList.keySet().toArray(new String[localityList.size()]);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class LocalityListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return localityList.get(position);
+        return localityList.get(mKeys[position]);
     }
 
     @Override
@@ -47,10 +51,14 @@ public class LocalityListAdapter extends BaseAdapter {
         View view = convertView;
         if (view == null)
             view = inflater.inflate(R.layout.locality_list_item, null);
+
+        String key = mKeys[position];
+        Locality locality = (Locality) getItem(position);
+
         TextView localityText = (TextView) view.findViewById(R.id.localityListItemText);
         TextView houseText = (TextView) view.findViewById(R.id.houseListItemText);
-        localityText.setText("Locality " + localityList.get(position).getId());
-        houseText.setText(localityList.get(position).getHousesLeft() + "/" + localityList.get(position).getLocalityHouses().size());
+        localityText.setText("Locality " + position);
+        houseText.setText(locality.getHousesLeft() + "/" + locality.getLocalityHouses().size());
         return view;
     }
 

@@ -33,7 +33,6 @@ public class LocalitySelect extends AppCompatActivity {
 
                 // Open the clicked locality's activity
                 Intent intent = new Intent(LocalitySelect.this, LocalityActivity.class);
-                String message = "abc";
                 intent.putExtra("locality", user.getUserLocality().get(position));
                 startActivity(intent);
             }
