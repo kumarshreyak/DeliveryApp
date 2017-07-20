@@ -30,6 +30,7 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mgoogleMap;
     Locality locality;
     HashMap<String, House> house;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
 
         // Get the locality's data
         locality = (Locality) getIntent().getSerializableExtra("locality");
+        userId = (String) getIntent().getSerializableExtra("userId");
         house = locality.getLocalityHouses();
     }
 
@@ -136,6 +138,7 @@ public class LocalityNav extends FragmentActivity implements OnMapReadyCallback 
                     Intent intent = new Intent(LocalityNav.this, HouseActivity.class);
                     intent.putExtra("house", houseVal);
                     intent.putExtra("localityId", locality.getId());
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
                 }
 

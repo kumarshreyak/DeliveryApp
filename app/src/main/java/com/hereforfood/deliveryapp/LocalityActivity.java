@@ -12,6 +12,8 @@ import android.widget.TextView;
 public class LocalityActivity extends AppCompatActivity {
 
     Locality locality;
+    String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ public class LocalityActivity extends AppCompatActivity {
 
         // Setting the title bar
         locality = (Locality) getIntent().getSerializableExtra("locality");
+        userId = (String) getIntent().getSerializableExtra("userId");
         setTitle("Locality " + locality.getId());
 
         // Setting the Address details
@@ -30,6 +33,7 @@ public class LocalityActivity extends AppCompatActivity {
     public void navButtonClick(View view) {
         Intent intent = new Intent(this, LocalityNav.class);
         intent.putExtra("locality",locality);
+        intent.putExtra("userId",userId);
         startActivity(intent);
     }
 

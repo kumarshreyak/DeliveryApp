@@ -87,13 +87,16 @@ public class DatabaseHelper {
         });
     }
 
-    public void setHouseDeliveryStatus(House house, boolean value, String userId, String localityId)
+    public void setHouseDeliveryStatus(boolean value, String houseId, String userId, String localityId)
     {
-//        house.setComplete(value);
-//        userDB = database.getReference(USER_TABLE)
-//                .child(userId)
-//                .child("locality")
-//                .child(localityId);
+        database.getReference(USER_TABLE)
+                .child(userId)
+                .child("locality")
+                .child(localityId)
+                .child("house")
+                .child(houseId)
+                .child("isComplete")
+                .setValue(value);
     }
 
     // TODO functions for getting data from website (houses etc.)

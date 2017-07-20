@@ -18,14 +18,18 @@ public class HouseActivity extends AppCompatActivity {
 
     House house;
     String localityId;
+    String userId;
     TextView houseAddrText, delStatText;
+    DatabaseHelper dbHelper = new DatabaseHelper();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
         house = (House) getIntent().getSerializableExtra("house");
-        localityId = String.valueOf((int) getIntent().getSerializableExtra("localityId"));
+        localityId = (String) getIntent().getSerializableExtra("localityId");
+        userId = (String) getIntent().getSerializableExtra("userId");
         setTitle("House " + house.getId());
 
         // TODO Add elements to this activity and make callingActivity "Deliver" button (and its activity)
@@ -55,11 +59,13 @@ public class HouseActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked YES button
+                dbHelper.setHouseDeliveryStatus(true, house.getId(), userId, localityId);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked NO Button
+                dbHelper.setHouseDeliveryStatus(false, house.getId(), userId, localityId);
             }
         });
 

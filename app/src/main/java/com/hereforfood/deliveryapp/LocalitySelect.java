@@ -39,6 +39,7 @@ public class LocalitySelect extends AppCompatActivity {
                 // Open the clicked locality's activity
                 Intent intent = new Intent(LocalitySelect.this, LocalityActivity.class);
                 intent.putExtra("locality", localityHashMap.get(mKey[position]));
+                intent.putExtra("userId", user.getUserId());
                 startActivity(intent);
             }
         });
