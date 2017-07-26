@@ -15,7 +15,7 @@ public class User implements Serializable {
     public String userEmail;
     public HashMap<String, Locality> locality;
     public String userCity;
-    public long localitiesDone = 0;
+    public int localitiesLeft = 0;
 
     public User() {}
 
@@ -42,8 +42,8 @@ public class User implements Serializable {
         return locality;
     }
 
-    public long getLocalitiesDone() {
-        return localitiesDone;
+    public int getLocalitiesLeft() {
+        return localitiesLeft;
     }
 
     public long getTotalLocalities() {
@@ -56,5 +56,6 @@ public class User implements Serializable {
     public void addLocality(Locality new_locality)
     {
         locality.put(new_locality.getId(), new_locality);
+        localitiesLeft ++;
     }
 }

@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView localityText = (TextView) findViewById(R.id.localityText);
         final TextView houseText = (TextView) findViewById(R.id.houseText);
 
+        // Reading User's node from the firebase database
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("User").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(currUser.getUserCity());
 
                 // Setting the text views
-                localityText.setText("Localities  " + currUser.getLocalitiesDone() + " / " + currUser.getTotalLocalities());
-                houseText.setText("Houses " + currUser.getLocalitiesDone() + " / " + currUser.getTotalLocalities());
+                localityText.setText("Localities  " + (currUser.getTotalLocalities() - currUser.getLocalitiesLeft()) + " / " + currUser.getTotalLocalities());
 
                 Log.d("D", "User name: " + currUser.getUserCity() + ", email " + currUser.getUserEmail());
             }

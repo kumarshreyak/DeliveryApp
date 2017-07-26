@@ -1,11 +1,14 @@
 package com.hereforfood.deliveryapp;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Shreyak Kumar on 29-04-2017.
@@ -21,7 +24,7 @@ public class DatabaseHelper {
 
     FirebaseAuth auth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference userDB, houseDB, localityDB, assignmentDB;
+    DatabaseReference userDB, houseDB, localityDB, assignmentDB, refDB;
 
 
     public void DatabaseHelper () {
@@ -87,8 +90,7 @@ public class DatabaseHelper {
         });
     }
 
-    public void setHouseDeliveryStatus(boolean value, String houseId, String userId, String localityId)
-    {
+    public void setHouseDeliveryStatus(boolean value, String houseId, final String userId, final String localityId) {
         database.getReference(USER_TABLE)
                 .child(userId)
                 .child("locality")
@@ -97,6 +99,48 @@ public class DatabaseHelper {
                 .child(houseId)
                 .child("isComplete")
                 .setValue(value);
+
+        database.getReference()
+                .child("User")
+                .child(userId)
+                .child("locality")
+                .child(localityId)
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //TODO make this shiz faster
+
+                Locality temp;
+
+                // Getting locality data
+                temp = dataSnapshot.getValue(Locality.class);
+                String uId, lId;
+                uId = userId;
+                lId = localityId;
+
+                if(temp.getHousesLeft() == 1 || temp.getHousesLeft() == 0) {
+                    setLocalityHousesLeft(0, uId, lId);
+                } else {
+                    setLocalityHousesLeft(temp.getHousesLeft() - 1, uId, lId);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("D", "Failed to read value.", error.toException());
+            }
+        });
+
+    }
+
+    public void setLocalityHousesLeft(int housesLeft, String userId, String localityId) {
+        database.getReference(USER_TABLE)
+                .child(userId)
+                .child("locality")
+                .child(localityId)
+                .child("housesLeft")
+                .setValue(housesLeft);
     }
 
     // TODO functions for getting data from website (houses etc.)

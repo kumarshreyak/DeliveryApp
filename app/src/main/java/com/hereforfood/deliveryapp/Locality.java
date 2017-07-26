@@ -45,9 +45,9 @@ public class Locality implements Serializable {
         return AddressLine1;
     }
 
-    public void addHouse(House new_house)
-    {
+    public void addHouse(House new_house) {
         house.put(new_house.getId(), new_house);
+        housesLeft ++;
     }
 
 }
